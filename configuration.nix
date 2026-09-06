@@ -16,7 +16,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "zfs" "fuse.mergerfs" ];
-  boot.kernelParams = [ "console=tty0" ];
+  boot.kernelParams = [ "console=tty1" ];
   boot.zfs.forceImportRoot = false;
   boot.initrd.availableKernelModules = ["r8169" "r8152" "e1000e" "igc" "tg3"];
 
@@ -25,6 +25,8 @@
   networking.hostId = "8425e349";
   networking.useDHCP = true;
   networking.useNetworkd = true;
+
+  systemd.services."getty@tty1".enable = true;
 
   # Enable Flakes and experimental CLI features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
