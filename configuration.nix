@@ -31,6 +31,16 @@
   # Enable Flakes and experimental CLI features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  users.groups.dotfiles = {};
+
+  users.users.patroclus = {
+    isNormalUser = true;
+    description = "Orpheus NAS Primary User (Me)";
+    extraGroups = [ "wheel" "dotfiles" ];
+   # openssh.authorizedKeys.keys = [
+   # ];
+  }; 
+
   # Core System Packages
   environment.systemPackages = with pkgs; [
     git
