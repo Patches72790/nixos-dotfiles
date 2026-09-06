@@ -7,6 +7,8 @@
     ./modules/services.nix
     ./modules/storage.nix
     ./modules/programs.nix
+    ./modules/containers.nix
+    ./modules/sops.nix
   ];
 
 
@@ -35,6 +37,9 @@
     vim
     mergerfs
     smartmontools
+    compose2nix
+    sops
+    ssh-to-age
   ];
 
   system.stateVersion = "24.11";
