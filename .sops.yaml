@@ -1,6 +1,11 @@
+keys:
+  - &ssh-host-key age1ptzakth0xwsc0s3h9kx9jgzmkmdarl3rz5v2vgkx6cy4mj0uma2slhtqdq
+  - &user-host-key age10f2h2gjs0htw0tst25kkz7ecsqj4nfhpzzkhvreqmaud670t9cuq8mqz3s
+  - &age-primary-key age1rxfg27lfrrecl502y2r3lpwkuv2nzknpelnp0gjpp69fxl4a8p8qh5xj7n
 creation_rules:
-  - path_regex: secrets/.*\.yaml$
+  - path_regex: secrets/secrets.yaml$
     key_groups:
       - age:
-          - "age1ptzakth0xwsc0s3h9kx9jgzmkmdarl3rz5v2vgkx6cy4mj0uma2slhtqdq" # system ssh pub key
-          - "age1vk7dacx3t2vpw3308j4wywhpu076rkwgav8xjlvp0q0e35zmsv8qk8ml2d" # for user patroclus
+          - *ssh-host-key
+          - *user-host-key
+          - *age-primary-key

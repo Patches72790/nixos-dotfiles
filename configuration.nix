@@ -40,6 +40,7 @@
     compose2nix
     sops
     ssh-to-age
+    age
   ];
 
   system.stateVersion = "24.11";
