@@ -131,9 +131,9 @@ cat <<NIX > "${DOTFILES_DIR}/configuration.nix"
   ];
 
   # MergerFS mount pooling disk1 and disk2 into /storage
-  fileSystems."/storage" = {
+  fileSystems."/mnt/storage" = {
     fsType = "fuse.mergerfs";
-    device = "/disks/disk1:/disks/disk2";
+    device = "/mnt/disks/disk1:/mnt/disks/disk2";
     options = [
       "defaults"
       "nonempty"

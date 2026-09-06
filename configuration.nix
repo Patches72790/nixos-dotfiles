@@ -5,10 +5,19 @@
     ./hardware-configuration.nix
   ];
 
+  services.openssh = {
+    enable = true;
+    settings.PermitRootLogin = "yes";
+  };
+
+  users.users.root.initialPassword = "nixos";
+
   # Bootloader and ZFS kernel support
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "zfs" "fuse.mergerfs" ];
+  boot.kernelParams = [ "console=tty1" "video=efifb:off" ];
+  boot.zfs.forceImportRoot = false;
 
   # Networking and mandatory ZFS Host ID
   networking.hostName = "orpheus-nas";
@@ -26,9 +35,9 @@
   ];
 
   # MergerFS mount pooling disk1 and disk2 into /storage
-  fileSystems."/storage" = {
+  fileSystems."/mnt/storage" = {
     fsType = "fuse.mergerfs";
-    device = "/disks/disk1:/disks/disk2";
+    device = "/mnt/disks/disk1:/mnt/disks/disk2";
     options = [
       "defaults"
       "nonempty"
