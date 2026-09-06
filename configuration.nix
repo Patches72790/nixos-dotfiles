@@ -16,7 +16,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "zfs" "fuse.mergerfs" ];
-  boot.kernelParams = [ "console=tty1" "video=efifb:off" ];
+  boot.kernelParams = [ "console=tty0" ];
   boot.zfs.forceImportRoot = false;
   boot.initrd.availableKernelModules = ["r8169" "r8152" "e1000e" "igc" "tg3"];
 
