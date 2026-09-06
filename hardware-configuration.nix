@@ -21,29 +21,7 @@
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/B8CB-5E4B";
       fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
-
-  fileSystems."/disks/disk1" =
-    { device = "/dev/disk/by-uuid/778517ef-0b29-499b-b831-9674b6f79c2a";
-      fsType = "ext4";
-    };
-
-  fileSystems."/disks/disk2" =
-    { device = "/dev/disk/by-uuid/0f56859b-290f-482f-9abc-27d5fa544578";
-      fsType = "ext4";
-    };
-
-  fileSystems."/mnt/disks/disk1" =
-    { device = "/disks/disk1";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/mnt/disks/disk2" =
-    { device = "/disks/disk2";
-      fsType = "none";
-      options = [ "bind" ];
+      options = [ "fmask=0077" "dmask=0077" ];
     };
 
   swapDevices = [ ];
