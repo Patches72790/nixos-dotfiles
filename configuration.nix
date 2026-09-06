@@ -18,10 +18,13 @@
   boot.supportedFilesystems = [ "zfs" "fuse.mergerfs" ];
   boot.kernelParams = [ "console=tty1" "video=efifb:off" ];
   boot.zfs.forceImportRoot = false;
+  boot.initrd.availableKernelModules = ["r8169" "r8152" "e1000e" "igc" "tg3"];
 
   # Networking and mandatory ZFS Host ID
   networking.hostName = "orpheus-nas";
   networking.hostId = "8425e349";
+  networking.useDHCP = true;
+  networking.useNetworkd = true;
 
   # Enable Flakes and experimental CLI features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
