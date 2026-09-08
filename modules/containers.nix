@@ -5,4 +5,8 @@
   virtualisation.oci-containers = {
     backend = "docker";
   };
+
+  imports = [
+    ./servarr-project.nix
+  ];
 }
