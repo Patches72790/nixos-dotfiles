@@ -15,6 +15,7 @@
 
   # Bootloader and ZFS kernel support
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 5;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "zfs" "fuse.mergerfs" ];
   boot.kernelParams = [ "console=tty1" ];
