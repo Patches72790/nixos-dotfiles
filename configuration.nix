@@ -9,6 +9,7 @@
     ./modules/programs.nix
     ./modules/containers.nix
     ./modules/sops.nix
+    ./modules/samba.nix
   ];
 
 
@@ -41,6 +42,7 @@
     sops
     ssh-to-age
     age
+    tree
   ];
 
   system.stateVersion = "24.11";

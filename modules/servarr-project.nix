@@ -23,7 +23,7 @@ in
       "TZ" = "UTC";
     };
     volumes = [
-      "${host_base_data_path}/flaresolverr:/config:rw"
+      "${host_base_config_path}/flaresolverr:/config:rw"
     ];
     ports = [
       "8191:8191/tcp"
