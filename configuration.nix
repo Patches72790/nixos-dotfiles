@@ -18,9 +18,13 @@
   boot.loader.systemd-boot.configurationLimit = 5;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "zfs" "fuse.mergerfs" ];
-  boot.kernelParams = [ "console=tty1" ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.kernelParams = [ "console=tty1" "amdgpu.dc=1" ];
   boot.zfs.forceImportRoot = false;
   boot.initrd.availableKernelModules = ["r8169" "r8152" "e1000e" "igc" "tg3"];
+
+  hardware.enableRedistributableFirmware = true;
+  hardware.graphics.enable = true;
 
   # Networking and mandatory ZFS Host ID
   networking.hostName = "orpheus-nas";

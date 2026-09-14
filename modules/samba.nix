@@ -18,7 +18,7 @@ services.samba = {
       "map to guest" = "bad user";
     };
     public = {
-      "path" = "/mnt/samba-share/public";
+      "path" = "/mnt/storage/samba-share/public";
       "browseable" = "yes";
       "read only" = "yes";
       "guest ok" = "yes";
@@ -27,7 +27,7 @@ services.samba = {
       "valid users" = "@nas-users";
     };
     private = {
-      "path" = "/mnt/samba-share/private";
+      "path" = "/mnt/storage/samba-share/private";
       "browseable" = "yes";
       "read only" = "no";
       "guest ok" = "no";
