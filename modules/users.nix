@@ -9,7 +9,7 @@
   users.users.patroclus = {
     isNormalUser = true;
     description = "Orpheus NAS Primary User (Me)";
-    extraGroups = [ "wheel" "dotfiles" "nas-users" ];
+    extraGroups = [ "wheel" "dotfiles" "nas-users" "docker" ];
    # openssh.authorizedKeys.keys = [
    # ];
   }; 

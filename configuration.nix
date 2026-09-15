@@ -28,11 +28,6 @@ boot.loader = {
   };
 };
 
-
-  # Bootloader and ZFS kernel support
-  #boot.loader.systemd-boot.enable = true;
-  #boot.loader.systemd-boot.configurationLimit = 5;
-  #boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "zfs" "fuse.mergerfs" ];
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.zfs.forceImportRoot = false;
@@ -44,10 +39,6 @@ boot.kernelParams = [
   "video=HDMI-A-1:1920x1080@60"  # Forces active signal out the connected HDMI port
 ];
 
-## Automatically sync primary /boot to secondary ESP on rebuild
-#boot.loader.systemd-boot.extraInstallCommands = ''
-#  ${pkgs.rsync}/bin/rsync -a --delete /boot/ /boot-secondary/
-#'';
 
   hardware.enableRedistributableFirmware = true;
   hardware.graphics.enable = true;
@@ -73,7 +64,9 @@ boot.kernelParams = [
     sops
     ssh-to-age
     age
+    nixfmt
     tree
+    kepubify
   ];
 
   system.stateVersion = "24.11";
