@@ -1,17 +1,22 @@
 { config, pkgs, ... }:
 
 {
-  
-  users.groups.dotfiles = {};
-  users.groups.nas-users = {};
+
+  users.groups.dotfiles = { };
+  users.groups.nas-users = { };
   users.users.root.initialPassword = "nixos";
 
   users.users.patroclus = {
     isNormalUser = true;
     description = "Orpheus NAS Primary User (Me)";
-    extraGroups = [ "wheel" "dotfiles" "nas-users" "docker" ];
-   # openssh.authorizedKeys.keys = [
-   # ];
-  }; 
+    extraGroups = [
+      "wheel"
+      "dotfiles"
+      "nas-users"
+      "docker"
+    ];
+    # openssh.authorizedKeys.keys = [
+    # ];
+  };
 
 }

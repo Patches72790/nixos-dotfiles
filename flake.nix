@@ -8,13 +8,20 @@
 
   };
 
-  outputs = { self, nixpkgs, sops-nix, ... }@inputs: {
-    nixosConfigurations."orpheus-nas" = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./configuration.nix
-        sops-nix.nixosModules.sops
-      ];
+  outputs =
+    {
+      self,
+      nixpkgs,
+      sops-nix,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations."orpheus-nas" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./configuration.nix
+          sops-nix.nixosModules.sops
+        ];
+      };
     };
-  };
 }

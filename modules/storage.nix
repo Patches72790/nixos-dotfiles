@@ -25,13 +25,19 @@
   fileSystems."/mnt/disks/disk1" = {
     device = "/dev/disk/by-label/storage1";
     fsType = "ext4";
-    options = [ "defaults" "nofail" ];
-  }; 
+    options = [
+      "defaults"
+      "nofail"
+    ];
+  };
 
   fileSystems."/mnt/disks/disk2" = {
     device = "/dev/disk/by-label/storage2";
     fsType = "ext4";
-    options = [ "defaults" "nofail" ];
-  }; 
+    options = [
+      "defaults"
+      "nofail"
+    ];
+  };
 
 }

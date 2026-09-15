@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 {
 
@@ -13,7 +18,7 @@
     openFirewall = true;
     settings = {
       WebService = {
-	AllowUnencrypted = true;
+        AllowUnencrypted = true;
         Origins = lib.mkForce "http://localhost:9090 https://localhost:9090 http://127.0.0.1:9090";
       };
     };
