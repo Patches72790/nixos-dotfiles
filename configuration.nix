@@ -12,16 +12,42 @@
     ./modules/samba.nix
   ];
 
+boot.loader = {
+  systemd-boot.enable = false;
+  efi.canTouchEfiVariables = true;
+
+  grub = {
+    enable = true;
+    efiSupport = true;
+    device = "nodev";
+    configurationLimit = 5;
+    mirroredBoots = [
+      { path = "/boot"; devices = [ "/dev/disk/by-uuid/B8CB-5E4B" ]; }
+      { path = "/boot-secondary"; devices = [ "/dev/disk/by-uuid/12CE-A600" ]; }
+    ];
+  };
+};
+
 
   # Bootloader and ZFS kernel support
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
-  boot.loader.efi.canTouchEfiVariables = true;
+  #boot.loader.systemd-boot.enable = true;
+  #boot.loader.systemd-boot.configurationLimit = 5;
+  #boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "zfs" "fuse.mergerfs" ];
   boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.kernelParams = [ "console=tty1" "amdgpu.dc=1" ];
   boot.zfs.forceImportRoot = false;
   boot.initrd.availableKernelModules = ["r8169" "r8152" "e1000e" "igc" "tg3"];
+
+boot.kernelParams = [
+  "console=tty1"
+  "fbcon=map:1"                  # Forces TTY console onto fb1 (AMD GPU) instead of fb0 (BMC)
+  "video=HDMI-A-1:1920x1080@60"  # Forces active signal out the connected HDMI port
+];
+
+## Automatically sync primary /boot to secondary ESP on rebuild
+#boot.loader.systemd-boot.extraInstallCommands = ''
+#  ${pkgs.rsync}/bin/rsync -a --delete /boot/ /boot-secondary/
+#'';
 
   hardware.enableRedistributableFirmware = true;
   hardware.graphics.enable = true;

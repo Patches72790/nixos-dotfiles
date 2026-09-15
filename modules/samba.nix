@@ -31,6 +31,7 @@ services.samba = {
       "browseable" = "yes";
       "read only" = "no";
       "guest ok" = "no";
+      "ea support" = "yes";
       "create mask" = "0660";
       "directory mask" = "0770";
       "valid users" = "@nas-users";

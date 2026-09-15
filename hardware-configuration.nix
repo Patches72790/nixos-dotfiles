@@ -21,7 +21,13 @@
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/B8CB-5E4B";
       fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
+      options = [ "fmask=0077" "dmask=0077" "nofail" ];
+    };
+
+  fileSystems."/boot-secondary" =
+    { device = "/dev/disk/by-uuid/12CE-A600";
+      fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" "nofail" ];
     };
 
   swapDevices = [ ];
