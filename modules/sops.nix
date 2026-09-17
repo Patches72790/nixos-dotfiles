@@ -11,5 +11,7 @@
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
     secrets.wireguard_private_key = { };
+
+    secrets.hardcover_calibre_api_key = { };
   };
 }

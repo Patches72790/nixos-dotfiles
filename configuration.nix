@@ -10,6 +10,7 @@
     ./modules/containers.nix
     ./modules/sops.nix
     ./modules/samba.nix
+    ./modules/tailscale.nix
   ];
 
   boot.loader = {
