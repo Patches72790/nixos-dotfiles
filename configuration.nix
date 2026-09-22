@@ -12,9 +12,8 @@
     ./modules/sops.nix
     ./modules/samba.nix
     ./modules/tailscale.nix
+    ./modules/neovim.nix
   ];
-
-  
 
   # Enable Flakes and experimental CLI features
   nix.settings.experimental-features = [
@@ -26,7 +25,8 @@
   environment.systemPackages = with pkgs; [
     git
     vim
-	zsh
+    zsh
+    neovim
     mergerfs
     smartmontools
     compose2nix
@@ -34,34 +34,20 @@
     ssh-to-age
     age
     nixfmt
+    nixfmt-tree
     tree
   ];
 
-programs.zsh.enable = true;
-
-  programs.git = {
-    enable = true;
-    config.alias = {
-	s = "status";
-	ci = "commit";
-	co = "checkout";
-	df = "diff";
-	lg = "log";
-	a = "add";
-	};
-
-      config.push = { autoSetupRemote = true; };
+  environment.shellAliases = {
+    ll = "ls -lh";
+    gst = "git s";
+    ga = "git a";
+    gd = "git df";
+    gcam = "git ci -am";
+    glg = "git lg --oneline --graph --decorate --all";
+    nixflkup = "nix flake update --flake /etc/dotfiles/nixos";
+    nixrbsw = "sudo nixos-rebuild switch --flake /etc/dotfiles/nixos#orpheus-nas";
   };
-
-environment.shellAliases = {
-	ll = "ls -lh";
-	gst = "git s";
-	ga = "git a";
-	gd = "git df";
-	gcam = "git c -am";
-	nixflkup = "nix flake update --flake /etc/dotfiles/nixos";
-	nixrbsw = "sudo nixos-rebuild switch --flake /etc/dotfiles/nixos#orpheus-nas";
-};
 
   system.stateVersion = "24.11";
 }
