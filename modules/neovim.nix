@@ -12,13 +12,14 @@
     vimAlias = true;
     configure = {
       customRC = ''
-        		set number
-        		set relativenumber
-        		set list
-        	'';
+	set expandtab
+        set number
+        set relativenumber
+        set list
+      '';
 
       packages.myVimPackage = with pkgs.vimPlugins; {
-        start = [ ctrlp-vim ];
+        start = [ ctrlp-vim blink-cmp telescope-nvim ];
       };
     };
 
