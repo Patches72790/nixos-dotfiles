@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./modules/system.nix
     ./modules/users.nix
     ./modules/services.nix
     ./modules/storage.nix
@@ -13,58 +14,7 @@
     ./modules/tailscale.nix
   ];
 
-  boot.loader = {
-    systemd-boot.enable = false;
-    efi.canTouchEfiVariables = true;
-
-    grub = {
-      enable = true;
-      efiSupport = true;
-      device = "nodev";
-      configurationLimit = 5;
-      mirroredBoots = [
-        {
-          path = "/boot";
-          devices = [ "/dev/disk/by-uuid/B8CB-5E4B" ];
-        }
-        {
-          path = "/boot-secondary";
-          devices = [ "/dev/disk/by-uuid/12CE-A600" ];
-        }
-      ];
-    };
-  };
-
-  boot.supportedFilesystems = [
-    "zfs"
-    "fuse.mergerfs"
-  ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.zfs.forceImportRoot = false;
-  boot.initrd.availableKernelModules = [
-    "r8169"
-    "r8152"
-    "e1000e"
-    "igc"
-    "tg3"
-  ];
-
-  boot.kernelParams = [
-    "console=tty1"
-    "fbcon=map:1" # Forces TTY console onto fb1 (AMD GPU) instead of fb0 (BMC)
-    "video=HDMI-A-1:1920x1080@60" # Forces active signal out the connected HDMI port
-  ];
-
-  hardware.enableRedistributableFirmware = true;
-  hardware.graphics.enable = true;
-
-  # Networking and mandatory ZFS Host ID
-  networking.hostName = "orpheus-nas";
-  networking.hostId = "8425e349";
-  networking.useDHCP = true;
-  networking.useNetworkd = true;
-
-  systemd.services."getty@tty1".enable = true;
+  
 
   # Enable Flakes and experimental CLI features
   nix.settings.experimental-features = [
@@ -76,6 +26,7 @@
   environment.systemPackages = with pkgs; [
     git
     vim
+	zsh
     mergerfs
     smartmontools
     compose2nix
@@ -84,8 +35,33 @@
     age
     nixfmt
     tree
-    kepubify
   ];
+
+programs.zsh.enable = true;
+
+  programs.git = {
+    enable = true;
+    config.alias = {
+	s = "status";
+	ci = "commit";
+	co = "checkout";
+	df = "diff";
+	lg = "log";
+	a = "add";
+	};
+
+      config.push = { autoSetupRemote = true; };
+  };
+
+environment.shellAliases = {
+	ll = "ls -lh";
+	gst = "git s";
+	ga = "git a";
+	gd = "git df";
+	gcam = "git c -am";
+	nixflkup = "nix flake update --flake /etc/dotfiles/nixos";
+	nixrbsw = "sudo nixos-rebuild switch --flake /etc/dotfiles/nixos#orpheus-nas";
+};
 
   system.stateVersion = "24.11";
 }
