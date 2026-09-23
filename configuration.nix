@@ -41,6 +41,7 @@
   environment.shellAliases = {
     ll = "ls -lh";
     gst = "git s";
+    gp = "git p";
     ga = "git a";
     gd = "git df";
     gcam = "git ci -am";
