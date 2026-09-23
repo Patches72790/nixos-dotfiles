@@ -18,9 +18,15 @@
   systemd.services."getty@tty1".enable = true;
 
   boot = {
+    initrd = {
+        kernelModules = [ "amdgpu" ];
+        availableKernelModules = ["r8169" "r8152" "e1000e" "igc" "tg3"];
+    };
 
     kernelParams = [
       "console=tty1"
+      "fbcon=map:1"
+      "video=HDMI-A-1:1920x1080@60"
     ];
 
     zfs.forceImportRoot = false;
